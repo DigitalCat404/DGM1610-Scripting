@@ -31,14 +31,21 @@ public class If_Statements : MonoBehaviour
         if(truth){
             Debug.Log("The truth is true");
             truth = false;
+        } else {
+            truth = true;
+            Debug.Log("The truth is false. God help us all");
         }
 
         if((input == 'W') && (!truth)){
             Debug.Log("Move forward to get that W");
+        } else {
+            Debug.Log("We're not pursuing the W");
         }
 
         if(captainAmerica * 0.2 == batman / 3){
             Debug.Log("Maybe Captain America could equal Batman...");
+        } else {
+            Debug.Log("Captain America will always be better");
         }
     }
 
