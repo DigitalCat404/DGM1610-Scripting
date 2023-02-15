@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float horizontalInput;
+    private float horizontalInput;
     public float speed = 10;
 
     public float xBounds = 33f;
@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public Transform blaster;
 
     public GameObject laserBolt;
+
+    private string inventory = "";
     
     //laser firing delay
     public float laserDelay = .2f;
@@ -46,7 +48,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other){
+
+        //if hit by pickup, collect and put in inventory
+        if(other.tag == "Pickup"){
+            inventory = other.tag;
+            Debug.Log("Inventory: " + inventory);
+        }
+
         //delete object with trigger striking player
         Destroy(other.gameObject);
+        //Debug.Log("deleted collision");
     }
 }
