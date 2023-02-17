@@ -11,12 +11,14 @@ GameObject:
   - component: {fileID: 3531790684541779145}
   - component: {fileID: 3531790684541779150}
   - component: {fileID: 3531790684541779151}
+  - component: {fileID: 2900901971782891126}
   - component: {fileID: 3531790684541779144}
   - component: {fileID: 3531790684541779147}
   - component: {fileID: 3531790684541779146}
+  - component: {fileID: -1363918703497065310}
   m_Layer: 0
-  m_Name: UFO Runner
-  m_TagString: Untagged
+  m_Name: UFO Shooter
+  m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +89,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &2900901971782891126
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531790684541779149}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3531790684541779144
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,6 +145,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+--- !u!114 &-1363918703497065310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531790684541779149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ecf371ee136574895c12ed1614582b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthValue: 3
+  scoreToGive: 0
 --- !u!1 &3531790685016010433
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +170,6 @@ GameObject:
   - component: {fileID: 3531790685016010432}
   - component: {fileID: 3531790685016010429}
   - component: {fileID: 3531790685016010434}
-  - component: {fileID: 3531790685016010435}
   m_Layer: 0
   m_Name: UFO Top
   m_TagString: Untagged
@@ -214,16 +242,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3531790685016010435
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3531790685016010433}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

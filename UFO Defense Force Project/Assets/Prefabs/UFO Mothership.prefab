@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5240803245319516469}
   - component: {fileID: 5240803245319516488}
   - component: {fileID: 5240803245319516471}
-  - component: {fileID: 5240803245319516470}
   m_Layer: 0
   m_Name: UFO Top
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5240803245319516470
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5240803245319516468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5240803245784769336
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,12 +94,14 @@ GameObject:
   - component: {fileID: 5240803245784769340}
   - component: {fileID: 5240803245784769339}
   - component: {fileID: 5240803245784769338}
+  - component: {fileID: 1508782989025252416}
   - component: {fileID: 5240803245784769350}
   - component: {fileID: 5240803245784769351}
   - component: {fileID: 5240803245784769348}
+  - component: {fileID: 7772109489007201185}
   m_Layer: 0
   m_Name: UFO Mothership
-  m_TagString: Untagged
+  m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +172,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &1508782989025252416
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5240803245784769336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5240803245784769350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,4 +227,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58be0266ff8a75d4695a87a148e7fd0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
+--- !u!114 &7772109489007201185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5240803245784769336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ecf371ee136574895c12ed1614582b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthValue: 10
+  scoreToGive: 0

@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //if spacebar is pressed, fire laser;   make sure enough time has passed before firing again
-        if((Input.GetKeyDown(KeyCode.Space))&&(Time.time-lastShotFired >= laserDelay)){
+        //replaced GetKeyDown with GetKey to enable "full auto"
+        if((Input.GetKey(KeyCode.Space))&&(Time.time-lastShotFired >= laserDelay)){
             Instantiate(laserBolt, blaster.transform.position, laserBolt.transform.rotation);
             
             //track firing delay
@@ -53,10 +54,16 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Pickup"){
             inventory = other.tag;
             Debug.Log("Inventory: " + inventory);
+
+            //delete object with trigger striking player
+            Destroy(other.gameObject);
+            //Debug.Log("deleted collision");
+
+        //if hitting a UFO
+        } else if(other.gameObject.CompareTag("UFO")){
+            Debug.Log("Ouch!");
         }
 
-        //delete object with trigger striking player
-        Destroy(other.gameObject);
-        //Debug.Log("deleted collision");
+        
     }
 }

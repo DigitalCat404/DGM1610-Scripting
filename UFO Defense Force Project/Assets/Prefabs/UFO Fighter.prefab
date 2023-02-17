@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9033677003548483904}
   - component: {fileID: 9033677003548483901}
   - component: {fileID: 9033677003548483906}
-  - component: {fileID: 9033677003548483907}
   m_Layer: 0
   m_Name: UFO Top
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &9033677003548483907
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033677003548483905}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9033677004021674829
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,12 +94,14 @@ GameObject:
   - component: {fileID: 9033677004021674825}
   - component: {fileID: 9033677004021674830}
   - component: {fileID: 9033677004021674831}
+  - component: {fileID: 9049979894997519015}
   - component: {fileID: 9033677004021674824}
   - component: {fileID: 9033677004021674827}
   - component: {fileID: 9033677004021674826}
+  - component: {fileID: -2066078433717629045}
   m_Layer: 0
   m_Name: UFO Fighter
-  m_TagString: Untagged
+  m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +172,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &9049979894997519015
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033677004021674829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.51080894
+  m_Height: 1.003254
+  m_Direction: 2
+  m_Center: {x: 0.0027486647, y: 0, z: -0.00039520158}
 --- !u!54 &9033677004021674824
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,3 +229,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &-2066078433717629045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9033677004021674829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ecf371ee136574895c12ed1614582b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthValue: 1
+  scoreToGive: 0
