@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 1689128045}
   - component: {fileID: 1689128046}
   m_Layer: 0
-  m_Name: EnemySpawnManager
+  m_Name: SpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -506,13 +506,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1689128044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e170dbd48adf4bf4e9dc45ebeef19b8d, type: 3}
+  m_Script: {fileID: 11500000, guid: f0daec0b67381a54a85a5acc1e6199c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 9033677004021674829, guid: d0656ae17060f35498a1fbbcb0e77642, type: 3}
   - {fileID: 3531790684541779149, guid: a3c331546e803cb4a8538934db02caf4, type: 3}
   - {fileID: 5240803245784769336, guid: b8e0d9993cc7a9d41a5486bcf0b9df03, type: 3}
+  pickupPrefabs:
+  - {fileID: 1243573035431411342, guid: 38193a7f7f44c45459ef95da6756b49b, type: 3}
   spawnRangeX: 22.5
   spawnPosZ: 24
 --- !u!1 &1741319477
