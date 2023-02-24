@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d408b870a751c10409d0ba5fd79bddde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topBounds: 30
+  topBounds: 19
   bottomBounds: -20
 --- !u!1001 &397532795567613450
 PrefabInstance:

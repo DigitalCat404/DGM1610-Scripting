@@ -8,6 +8,10 @@ public class ScoreManager : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText; //the text UI element to change
 
+    void Start(){
+        UpdateScoreText();
+    }
+
     public void IncreaseScore(int amount){
         score += amount;
         UpdateScoreText(); //update UI

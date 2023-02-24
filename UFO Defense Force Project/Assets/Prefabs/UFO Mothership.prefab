@@ -240,5 +240,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ecf371ee136574895c12ed1614582b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreToGive: 200
   healthValue: 8
-  scoreToGive: 0

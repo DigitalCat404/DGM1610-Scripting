@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class DetectCollisions : MonoBehaviour
 {
-    public int healthValue = 1;
     public int scoreToGive;
     //public ParticleSystem explosionParticle;
+    private ScoreManager scoreManager;
+
+    public int healthValue = 1;
 
     void Start(){
-        //scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     private void OnTriggerEnter(Collider other){
-        //if hit by an attack,  decrement health
-        if(other.gameObject.CompareTag("Projectile")){
+
+        //if hit by an attack, and not a Pickup,  decrement health and delete projectile
+        if((other.gameObject.CompareTag("Projectile"))&&(tag != "Pickup")){
             healthValue--;
+
+            //delete impacting projectile
             Destroy(other.gameObject);
 
         //if hitting a player, self-destruct
@@ -34,7 +39,7 @@ public class DetectCollisions : MonoBehaviour
     void CheckDeath(){
         if(healthValue <= 0){
             //Explosion();
-            //scoreManager.IncreaseScore(scoreToGive);
+            scoreManager.IncreaseScore(scoreToGive);
             Destroy(this.gameObject);
         }
     }

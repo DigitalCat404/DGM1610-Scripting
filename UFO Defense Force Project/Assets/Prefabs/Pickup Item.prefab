@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1243573035431411329}
   - component: {fileID: 1243573035431411333}
   - component: {fileID: 1243573035431411332}
+  - component: {fileID: 2671504556658524235}
   m_Layer: 0
   m_Name: Pickup Item
   m_TagString: Pickup
@@ -126,3 +127,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topBounds: 30
   bottomBounds: -20
+--- !u!114 &2671504556658524235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243573035431411342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ecf371ee136574895c12ed1614582b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreToGive: 500
+  healthValue: 1
