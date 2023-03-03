@@ -4,20 +4,30 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //control
     private float horizontalInput;
     public float speed = 10;
 
     public float xBounds = 33f;
 
+    //laser
     public Transform blaster;
 
     public GameObject laserBolt;
+
+    //Audio
+    private AudioSource blasterAudio;
+    public AudioClip laserShoot;
 
     private string inventory = "";
     
     //laser firing delay
     public float laserDelay = .2f;
     private float lastShotFired;
+
+    void Start(){
+        blasterAudio = GetComponent<AudioSource>();
+    }
 
 
     // Update is called once per frame
@@ -38,14 +48,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(xBounds, transform.position.y, transform.position.z);
         }
 
-        //if spacebar is pressed, fire laser;   make sure enough time has passed before firing again
-        //replaced GetKeyDown with GetKey to enable "full auto"
-        if((Input.GetKey(KeyCode.Space))&&(Time.time-lastShotFired >= laserDelay)){
-            Instantiate(laserBolt, blaster.transform.position, laserBolt.transform.rotation);
-            
-            //track firing delay
-            lastShotFired = Time.time;
-        }
+        LaserBlaster();
     }
 
     private void OnTriggerEnter(Collider other){
@@ -65,5 +68,19 @@ public class PlayerController : MonoBehaviour
         }
 
         
+    }
+
+    private void LaserBlaster(){
+        //if spacebar is pressed, fire laser;   make sure enough time has passed before firing again
+        //replaced GetKeyDown with GetKey to enable "full auto"
+        if((Input.GetKey(KeyCode.Space))&&(Time.time-lastShotFired >= laserDelay)){
+            Instantiate(laserBolt, blaster.transform.position, laserBolt.transform.rotation);
+            
+            //play sound effect
+            blasterAudio.PlayOneShot(laserShoot, 1f);
+
+            //track firing delay
+            lastShotFired = Time.time;
+        }
     }
 }
