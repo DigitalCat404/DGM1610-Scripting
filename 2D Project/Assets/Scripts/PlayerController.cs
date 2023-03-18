@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     //how high player jumps
     public float jumpForce;
+    public string inventory = "";
     
     
     //Player Rigidbody
@@ -26,10 +27,16 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private bool dubJump;
 
+    //Game Objects
+    [Header("Game Objects")]
+    private UIManager UIManager;
+
 
     void Start(){
         //identify the rigidbody component on Player
         rb = GetComponent<Rigidbody2D>();
+
+        UIManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
 
     //called between a fixed number of frames, best for physics based movement
@@ -43,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         //flip player when changing left/right direction
         if((!isFacingRight && horizontalInput > 0)||(isFacingRight && horizontalInput < 0)){
-            //FlipPlayer();
+            FlipPlayer();
         }
     }
 
@@ -68,20 +75,22 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scaler; //perform the flip
     }
 
-    /*private void OnTriggerEnter(Collider other){
+    private void OnTriggerEnter2D(Collider2D other){
 
         //if hit by pickup, collect and put in inventory
         if(other.tag == "Pickup"){
             inventory = other.tag;
             Debug.Log("Inventory: " + inventory);
+            UIManager.IncrementPickup();
 
             //delete object with trigger striking player
             Destroy(other.gameObject);
             //Debug.Log("deleted collision");
+        }
+    }
 
-        //if hitting a UFO
-        } else if(other.gameObject.CompareTag("UFO")){
-            Debug.Log("Ouch!");
-        } 
-    }*/
+    public void setInventory(string item){
+        inventory = item;
+        Debug.Log("Inventory: " + inventory);
+    }
 }
