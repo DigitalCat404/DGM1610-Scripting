@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     //how high player jumps
     public float jumpForce;
+    public int health = 3;
     public string inventory = "";
     
     
@@ -68,13 +69,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FlipPlayer(){
-        isFacingRight = !isFacingRight;
-        Vector3 scaler = transform.localScale; //local variable
-        scaler.x *= -1; //declare flipping the sprite graphic
-        transform.localScale = scaler; //perform the flip
-    }
-
     private void OnTriggerEnter2D(Collider2D other){
 
         //if hit by pickup, collect and put in inventory
@@ -87,6 +81,18 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
             //Debug.Log("deleted collision");
         }
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+        Debug.Log("Player took " + damage);
+    }
+
+    void FlipPlayer(){
+        isFacingRight = !isFacingRight;
+        Vector3 scaler = transform.localScale; //local variable
+        scaler.x *= -1; //declare flipping the sprite graphic
+        transform.localScale = scaler; //perform the flip
     }
 
     public void setInventory(string item){
