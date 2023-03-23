@@ -5,7 +5,6 @@ using UnityEngine;
 public class FlierAI : MonoBehaviour
 {
     public float speed = 2;
-    public float health = 1;
     public float leftEdge = -3;
     public float rightEdge = 3;
     private float leftBound;
@@ -46,20 +45,7 @@ public class FlierAI : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D other){
-        //other.gameObject.TakeDamage(1);
-    }
-
-
-    public void TakeDamage(int damage){
-        health -= damage;
-
-        if(health <= 0){
-            Debug.Log("Flier perished");
-            Destroy(gameObject);
-            //while destroying and instantiating is fine, you should recycle to reduce restrain
-        } else {
-            Debug.Log("Flier took " + damage);
-        }
+        //other.gameObject.PlayerController.TakeDamage(1);
     }
 
 

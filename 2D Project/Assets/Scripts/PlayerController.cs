@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     //Game Objects
     [Header("Game Objects")]
     private UIManager UIManager;
+    public Transform firePoint;
 
 
     void Start(){
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     //called between a fixed number of frames, best for physics based movement
     void FixedUpdate(){
+        //check for ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround); //check for ground
 
         //set horizontal to receive values from keyboard
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D other){
 
         //if hit by pickup, collect and put in inventory
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     public void TakeDamage(int damage){
         health -= damage;
         Debug.Log("Player took " + damage);
@@ -93,6 +97,12 @@ public class PlayerController : MonoBehaviour
         Vector3 scaler = transform.localScale; //local variable
         scaler.x *= -1; //declare flipping the sprite graphic
         transform.localScale = scaler; //perform the flip
+
+        if(isFacingRight){
+            firePoint.transform.eulerAngles = new Vector3(0,0,0);
+        } else {
+            firePoint.transform.eulerAngles = new Vector3(0,-180,0);
+        }
     }
 
     public void setInventory(string item){

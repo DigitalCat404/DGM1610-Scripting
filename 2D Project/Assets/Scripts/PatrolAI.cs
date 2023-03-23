@@ -5,7 +5,6 @@ using UnityEngine;
 public class PatrolAI : MonoBehaviour
 {
     public float speed = 3;
-    public float health;
     private Rigidbody2D rb;
     private bool isFacingRight = true;
     public Transform groundDetection;
@@ -49,20 +48,7 @@ public class PatrolAI : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         //other.gameObject.TakeDamage(1);
     }
-
-
-    public void TakeDamage(int damage){
-        health -= damage;
-
-        if(health <= 0){
-            Debug.Log("Patroller perished");
-            Destroy(gameObject);
-            //while destroying and instantiating is fine, you should recycle to reduce restrain
-        } else {
-            Debug.Log("Patroller took " + damage);
-        }
-    }
-
+    
 
     void FlipEnemy(){
 
