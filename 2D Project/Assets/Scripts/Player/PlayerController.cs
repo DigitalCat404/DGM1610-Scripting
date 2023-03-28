@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 10;
     //how high player jumps
     public float jumpForce;
-    public int health = 3;
     public string inventory = "";
     
     
@@ -87,11 +86,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage){
-        health -= damage;
-        Debug.Log("Player took " + damage);
-    }
-
     void FlipPlayer(){
         isFacingRight = !isFacingRight;
         Vector3 scaler = transform.localScale; //local variable
@@ -104,6 +98,7 @@ public class PlayerController : MonoBehaviour
             firePoint.transform.eulerAngles = new Vector3(0,-180,0);
         }
     }
+
 
     public void setInventory(string item){
         inventory = item;

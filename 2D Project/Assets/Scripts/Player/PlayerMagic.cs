@@ -13,9 +13,15 @@ public class PlayerMagic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButton("Fire1")&&(Time.time > lastShot + cooldown)){
-            lastShot = Time.time;
-            Fireball();
+        if(Time.timeScale != 0){
+
+            //cast Fireball
+            if(Input.GetButton("Fire1")&&(Time.time > lastShot + cooldown)){
+                lastShot = Time.time;
+                Fireball();
+            }
+
+            //swing melee
         }
     }
 

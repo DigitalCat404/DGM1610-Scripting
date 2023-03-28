@@ -43,11 +43,6 @@ public class PatrolAI : MonoBehaviour
 
         lastY = transform.position.y;
     }
-
-
-    void OnTriggerEnter2D(Collider2D other){
-        //other.gameObject.TakeDamage(1);
-    }
     
 
     void FlipEnemy(){

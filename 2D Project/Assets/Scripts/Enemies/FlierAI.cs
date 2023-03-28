@@ -42,12 +42,7 @@ public class FlierAI : MonoBehaviour
         }
 
     }
-
-
-    void OnTriggerEnter2D(Collider2D other){
-        //other.gameObject.PlayerController.TakeDamage(1);
-    }
-
+    
 
     void FlipEnemy(){
         isFacingRight = !isFacingRight;
