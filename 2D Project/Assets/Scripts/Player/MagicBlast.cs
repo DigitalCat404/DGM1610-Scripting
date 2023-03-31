@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MagicBlast : MonoBehaviour
 {
+    private PlayerAttack playerAttack;
     public float speed = 7;
-    public int damage = 1;
+    private int damage = 0;
     public float travelTime = 5;
     private float creationTime;
     private Rigidbody2D rb;
@@ -15,6 +16,9 @@ public class MagicBlast : MonoBehaviour
     void Start(){
         rb = GetComponent<Rigidbody2D>();
         creationTime = Time.time;
+
+        playerAttack = GameObject.Find("Player").GetComponent<PlayerAttack>();
+        damage = playerAttack.GiveFireDamage();
     }
 
     // Update is called once per frame
@@ -34,7 +38,8 @@ public class MagicBlast : MonoBehaviour
             enemy.TakeDamage(damage);
         }
 
-        if(!other.gameObject.CompareTag("Pickup")){
+        //phase through player and pickups
+        if(!other.gameObject.CompareTag("Pickup")&&(!other.gameObject.CompareTag("Player"))){
             Destroy(gameObject); //remove projectile
         }
     }

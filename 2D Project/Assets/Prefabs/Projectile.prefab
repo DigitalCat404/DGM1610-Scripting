@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5581785475748108734}
   m_Layer: 0
   m_Name: Projectile
-  m_TagString: Pickup
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,5 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 800
-  damage: 1
   travelTime: 4

@@ -268,7 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 360191510}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360191509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0.169, y: 0.062, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -382,7 +382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 729921761}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ForwardCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -428,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745663700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 939260318}
   - component: {fileID: 939260323}
   - component: {fileID: 939260324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Patroller
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -849,6 +849,7 @@ GameObject:
   - component: {fileID: 1133765323}
   - component: {fileID: 1133765325}
   - component: {fileID: 1133765326}
+  - component: {fileID: 1133765327}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -894,14 +895,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.001, y: 1.001}
+  m_Size: {x: 0.321, y: 0.321}
   m_EdgeRadius: 0
 --- !u!212 &1133765321
 SpriteRenderer:
@@ -944,7 +945,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2104039424, guid: 9fd60accc27928d4391b8b088a5ecb2d, type: 3}
   m_Color: {r: 0.23858182, g: 0.8207547, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -964,8 +965,8 @@ Transform:
   m_GameObject: {fileID: 1133765318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.84, y: -2.76, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.1, y: 3.1, z: 3.1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 745663701}
   - {fileID: 360191510}
@@ -1010,14 +1011,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
 --- !u!114 &1133765325
 MonoBehaviour:
@@ -1033,7 +1034,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 360191510}
   projectile: {fileID: 8228070945485380881, guid: 935b91567cc95d3439cea5f0597403e1, type: 3}
-  cooldown: 0.3
+  attackPos: {fileID: 360191510}
+  meleeRange: 0.5
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 128
+  meleeDamage: 2
+  fireDamage: 1
+  cooldown: 0.4
 --- !u!114 &1133765326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,6 +1057,26 @@ MonoBehaviour:
   maxHealth: 3
   curHealth: 0
   invulDuration: 0.5
+--- !u!95 &1133765327
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133765318}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ffb3484f71cee2f46aa9a6131a863ffe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1226622195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,7 +1587,7 @@ GameObject:
   - component: {fileID: 1974210878}
   - component: {fileID: 1974210881}
   - component: {fileID: 1974210882}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Flier
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1836,7 +1864,7 @@ GameObject:
   m_Component:
   - component: {fileID: 272202276926115648}
   - component: {fileID: 272202276926115651}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flier Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
