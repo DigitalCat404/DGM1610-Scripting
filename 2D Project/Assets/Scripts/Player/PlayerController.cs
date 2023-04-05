@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private bool dubJump;
 
+    //Animations
+    [Header("Animations")]
+    private Animator playerAnim;
+
     //Game Objects
     [Header("Game Objects")]
     private UIManager UIManager;
@@ -36,6 +40,8 @@ public class PlayerController : MonoBehaviour
     void Start(){
         //identify the rigidbody component on Player
         rb = GetComponent<Rigidbody2D>();
+        //identify animations on player
+        playerAnim = GetComponent<Animator>();
 
         UIManager = GameObject.Find("UI Manager").GetComponent<UIManager>();
     }
@@ -47,8 +53,13 @@ public class PlayerController : MonoBehaviour
 
         //set horizontal to receive values from keyboard
         horizontalInput = Input.GetAxis("Horizontal");
+        
         //moves player left and right   Vector3.right = X-axis
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        //transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        //if moving, walk animation
+        CheckWalk();
 
         //flip player when changing left/right direction
         if((!isFacingRight && horizontalInput > 0)||(isFacingRight && horizontalInput < 0)){
@@ -96,6 +107,16 @@ public class PlayerController : MonoBehaviour
             firePoint.transform.eulerAngles = new Vector3(0,0,0);
         } else {
             firePoint.transform.eulerAngles = new Vector3(0,-180,0);
+        }
+    }
+
+
+    void CheckWalk(){
+        if(horizontalInput != 0){
+                    //what bool, value to set it to
+            playerAnim.SetBool("isWalking", true);
+        } else {
+            playerAnim.SetBool("isWalking", false);
         }
     }
 
