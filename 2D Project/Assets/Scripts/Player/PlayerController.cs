@@ -69,11 +69,20 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame, per cycle
     void Update(){
-        if(isGrounded){dubJump = true;}
+        //reset double jump and jump animation when grounded
+        if(isGrounded){
+            dubJump = true;
+            playerAnim.SetBool("isGrounded", true);
+        } else {
+            playerAnim.SetBool("isGrounded", false);
+        }
 
         if(Input.GetKeyDown(KeyCode.Space) && ((dubJump || isGrounded)) ){
             rb.velocity = Vector2.up * jumpForce; //make player jump
-            
+
+            //set jump animation trigger
+            playerAnim.SetTrigger("Jump_Trig");
+
             //if double jumping, remove double jump
             if(!isGrounded){
                 dubJump = false;
