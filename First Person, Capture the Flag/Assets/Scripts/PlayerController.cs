@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         Move();
         CamLook();
 
-        if(Input.GetKeyDown("Space")){
+        if(Input.GetKeyDown("space")){
             Jump();
         }
 
@@ -97,4 +97,15 @@ public class PlayerController : MonoBehaviour
             //Die();
         }
     }
+
+    public void GiveHealth(int heal){
+        Debug.Log("Player healed " + heal);
+        
+        curHP += heal;
+        if(curHP > maxHP){
+            curHP = maxHP;
+        }
+    }
+
+    public void GiveAmmo(int rounds){}
 }
