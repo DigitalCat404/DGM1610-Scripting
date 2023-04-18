@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage){
         curHP -= damage;
 
+        Debug.Log("Player took " + damage);
+
         if(curHP <= 0){
             //Die();
         }
