@@ -20,8 +20,10 @@ public class HomeBase : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player") && gm.hasFlag){
+            
             Debug.Log("Player has reached home base!");
-            //gm.PlaceFlag();
+            gm.PlaceFlag();
+
             flagRend.enabled = true;
             foreach(Renderer r in gameObject.GetComponentsInChildren<Renderer>()) { r.enabled = true; }
         }

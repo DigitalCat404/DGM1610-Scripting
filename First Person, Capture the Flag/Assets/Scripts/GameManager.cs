@@ -8,12 +8,20 @@ public class GameManager : MonoBehaviour
     public bool hasFlag;
     public bool flagPlaced;
 
-    public int scoreToWin;
+    //public int scoreToWin;
     public int curScore;
+    public int capScore;
 
     public bool gamePaused;
+    public bool gameOver;
 
     public static GameManager instance;
+
+    private PlayerController player;
+
+    //hurry and catch the thief!
+    private Enemy enemy;
+    public bool rushOn;
 
     //called before Start, called only once
     void Awake()
@@ -24,19 +32,32 @@ public class GameManager : MonoBehaviour
     void Start(){
         hasFlag = false;
         flagPlaced = false;
+        rushOn = false;
+        gameOver = false;
+
+        Cursor.lockState = CursorLockMode.Locked;
 
         Time.timeScale = 1.0f;
+
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        enemy = GameObject.Find("Enemy").GetComponent<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(flagPlaced){
+        if((flagPlaced)&&(!gamePaused)){
             WinGame();
         }
 
-        if(Input.GetButtonDown("Cancel")){ //escape key pauses game
+        if(Input.GetButtonDown("Cancel")&&(!gamePaused)){ //escape key pauses game
             TogglePauseGame();
+        }
+
+        if((hasFlag)&&(!rushOn)){
+            Debug.Log("Rush mode on!");
+            rushOn = true;
+            enemy.SpeedUp();
         }
     }
 
@@ -45,8 +66,8 @@ public class GameManager : MonoBehaviour
         gamePaused = !gamePaused;
         Time.timeScale = gamePaused == true ? 0.0f : 1.0f;
 
-        //GameUI.instance.TogglePauseMenu(gamePaused);
-        //Cursor.lockState = gamePaused == true ? CursorLockMode.None : CursorLockMode.Locked; //hide or reveal cursor for UI
+        GameUI.instance.TogglePauseMenu(gamePaused);
+        Cursor.lockState = gamePaused == true ? CursorLockMode.None : CursorLockMode.Locked; //hide or reveal cursor for UI
     }
 
 
@@ -55,14 +76,18 @@ public class GameManager : MonoBehaviour
 
         GameUI.instance.UpdateScoreText(curScore);
 
-        if(curScore >= scoreToWin)
-            WinGame();
+        /*if(curScore >= scoreToWin) //removed score criteria
+            WinGame();*/
     }
 
 
     void WinGame(){
         Debug.Log("You've won the game!");
-        //Time.timeScale = 0;
+        Time.timeScale = 0.0f;
+        gamePaused = true;
+        gameOver = true;
+
+        AddScore(player.curHP * 50);
 
         GameUI.instance.SetEndGameScreen(true, curScore);
     }
@@ -72,10 +97,17 @@ public class GameManager : MonoBehaviour
         GameUI.instance.SetEndGameScreen(false, curScore);
         Time.timeScale = 0.0f;
         gamePaused = true;
+        gameOver = true;
     }
 
 
     public void PlaceFlag(){
         flagPlaced = true;
+        AddScore(capScore);
+    }
+
+
+    public void SetGameOver(){
+        gameOver = true;
     }
 }

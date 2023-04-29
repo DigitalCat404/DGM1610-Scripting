@@ -9,11 +9,15 @@ public class Enemy : MonoBehaviour
     //Enemy Stats (this method does not play well with Headers)
     public int curHP, maxHP, scoreToGive;
     public float moveSpeed, attackRange, yPathOffset;
+    private float initMoveSpeed, initAttackRange;
+    private bool rushOn, gamePaused;
 
     //coordinates for a path
     private List<Vector3> path;
 
     //private Weapon weapon;
+    public float attackSpeed;
+    private float lastHit;
 
     //target to follow
     private GameObject target;
@@ -30,6 +34,8 @@ public class Enemy : MonoBehaviour
         InvokeRepeating("UpdatePath", 0.0f, 0.5f);
 
         curHP = maxHP;
+        initMoveSpeed = moveSpeed;
+        initAttackRange = attackRange;
     }
 
     // Update is called once per frame
@@ -48,9 +54,13 @@ public class Enemy : MonoBehaviour
 
         if(dist <= attackRange){
 
-            player.TakeDamage(1);
-            /*if(weapon.CanShoot())
-                weapon.Shoot();*/            
+            if(Time.time >= lastHit + attackSpeed){
+                player.TakeDamage(1);
+                lastHit = Time.time;
+
+                /*if(weapon.CanShoot())
+                    weapon.Shoot();*/
+            }            
 
         } else { //if too far to attack, then chase
             ChaseTarget();
@@ -81,6 +91,24 @@ public class Enemy : MonoBehaviour
         //if reaching end, remove old path
         if(transform.position == path [0] + new Vector3(0, yPathOffset, 0))
             path.RemoveAt(0);
+    }
+
+
+    public void SpeedUp(){ //catch the thief!!
+        moveSpeed *= 3;
+        attackRange = 1f;
+        rushOn = true;
+    }
+
+
+    public void Pause(bool paused){
+        //prevent moving and attacking while restarting/quitting game
+        moveSpeed = paused == true ? 0f : initMoveSpeed;
+        attackRange = paused == true? 0f : initAttackRange;
+
+        if(rushOn){
+            SpeedUp();
+        }
     }
 
 

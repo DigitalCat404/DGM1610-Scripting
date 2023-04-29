@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public int maxHP;
     public int curHP;
+    private Vector3 dir;
 
     [Header("Mouse Look")]
     public float lookSensitivity;
@@ -21,11 +22,21 @@ public class PlayerController : MonoBehaviour
     private Camera camera;
     private Rigidbody rb;
     //private Weapon weapon;
+    private GameUI gameUI;
+    private GameManager gm;
+    public AudioClip oofClip;
+    private AudioSource hitSound;
 
 
     void Awake(){
         //weapon = GetComponent<Weapon>();
+
         curHP = maxHP;
+        gameUI = GameObject.Find("Game UI").GetComponent<GameUI>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        hitSound = GetComponent<AudioSource>();
+        
     }
 
     // Start is called before the first frame update
@@ -34,20 +45,32 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main;
         rb = GetComponent<Rigidbody>();
 
-        /* Initialize UI
-        GameUI.instnace.UpdateHealthBar(curHP, maxHP);
+        // Initialize UI
+        GameUI.instance.UpdateHealthBar(curHP, maxHP);
         GameUI.instance.UpdateScoreText(0);
-        GameUI.instance.UpdateAmmoText(weapon.curAmmo, weapon.maxAmmo); */
+
+        //GameUI.instance.UpdateAmmoText(weapon.curAmmo, weapon.maxAmmo);
+        GameUI.instance.UpdateAmmoText(0, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        CamLook();
+        if(gm.gameOver != true){ //freeze player when game's over
+            Move();
+            
+            if(gm.gamePaused != true) //prevent camera moving in menus
+                CamLook();
 
-        if(Input.GetKeyDown("space")){
-            Jump();
+            if(Input.GetKeyDown("space"))
+                Jump();
+
+        } else { //lock down momentum when paused
+            dir.x = 0f;
+            dir.y = 0f;
+            dir.z = 0f;
+            rb.velocity = dir;
+            rb.useGravity = false;
         }
 
         //Fire weapon
@@ -59,7 +82,7 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxis("Vertical") * moveSpeed;
 
         //move by manipulating rigidbody relative to camera
-        Vector3 dir = transform.right * x + transform.forward * z;
+        dir = transform.right * x + transform.forward * z;
 
         dir.y = rb.velocity.y;
         rb.velocity = dir;  //apply force in direction of camera
@@ -95,10 +118,28 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Player took " + damage);
 
+        hitSound.PlayOneShot(oofClip, 1f);
+
+        GameUI.instance.UpdateHealthBar(curHP, maxHP);
+
         if(curHP <= 0){
-            //Die();
+            Die();
+
+        } else { //slow down game and give player time to adjust to situation
+            Time.timeScale = 0.5f;
+            Invoke("HitSlowdownReturn", 0.75f);
+            /* Since Invoke is based on game time, pausing the game does not interfere
+            However this does mean pausing the game will reset time to normal early!
+            */
         }
     }
+
+
+    private void HitSlowdownReturn(){
+        Time.timeScale = 1f;
+        Debug.Log("Time returned to normal");
+    }
+
 
     public void GiveHealth(int heal){
         Debug.Log("Player healed " + heal);
@@ -107,7 +148,13 @@ public class PlayerController : MonoBehaviour
         if(curHP > maxHP){
             curHP = maxHP;
         }
+
+        GameUI.instance.UpdateHealthBar(curHP, maxHP);
     }
 
-    public void GiveAmmo(int rounds){}
+    void Die(){
+        gm.LoseGame();
+    }
+
+    //public void GiveAmmo(int rounds){}
 }

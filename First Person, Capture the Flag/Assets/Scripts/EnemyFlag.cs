@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyFlag : MonoBehaviour
 {
+    public GameObject grabFX;
+    public GameObject FXPoint;
+
+    public int stealScore;
+
     private GameManager gm;
     private Renderer rend;
 
@@ -18,7 +23,11 @@ public class EnemyFlag : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         gm.hasFlag = true;
+        gm.AddScore(stealScore);
+
         rend.enabled = false; //hide flag
         foreach(Renderer r in gameObject.GetComponentsInChildren<Renderer>()) { r.enabled = false; }
+
+        Instantiate(grabFX, FXPoint.transform.position, FXPoint.transform.rotation);
     }
 }

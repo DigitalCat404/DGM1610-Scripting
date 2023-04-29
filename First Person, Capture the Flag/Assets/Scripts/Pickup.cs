@@ -12,6 +12,7 @@ public class Pickup : MonoBehaviour
     public PickupType type;
     public int healthAmount;
     public int ammoAmount;
+    public int score;
 
     [Header("Bobbing Motion")]
     public float rotationSpeed;
@@ -19,13 +20,18 @@ public class Pickup : MonoBehaviour
     public float bobHeight;
     private bool bobbingUp;
     private Vector3 startPos;
+
     //public AudioClip pickupSFX;
+
+    private GameManager gm;
 
 
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
+
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
 
@@ -57,7 +63,7 @@ public class Pickup : MonoBehaviour
                 break;
 
                 case PickupType.Ammo:
-                    player.GiveAmmo(ammoAmount);
+                    //player.GiveAmmo(ammoAmount);
                 break;
 
                 default:
@@ -67,6 +73,8 @@ public class Pickup : MonoBehaviour
 
             //play sound effect
             //other.getComponent<AudioSource>().PlayOneShot(pickupSFX);
+
+            gm.AddScore(score);
 
             Destroy(gameObject);
         }
