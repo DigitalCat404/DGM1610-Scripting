@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown("escape")) //quit game on escape key
+            Application.Quit();
+            Debug.Log("Quitting game...");
+
         //set horizontal to receive values from keyboard
         horizontalInput = Input.GetAxis("Horizontal");
         
